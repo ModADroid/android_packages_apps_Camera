@@ -228,7 +228,7 @@ public class GLRootView extends GLSurfaceView
         mFlags &= ~FLAG_NEED_LAYOUT;
         int width = getWidth();
         int height = getHeight();
-        Log.v(TAG, "layout content pane " + width + "x" + height);
+        Log.d(TAG, "layout content pane " + width + "x" + height);
         if (mContentView != null && width != 0 && height != 0) {
             mContentView.layout(0, 0, width, height);
         }
@@ -289,7 +289,7 @@ public class GLRootView extends GLSurfaceView
      */
     // This is a GLSurfaceView.Renderer callback
     public void onSurfaceChanged(GL10 gl1, int width, int height) {
-        Log.v(TAG, "onSurfaceChanged: " + width + "x" + height
+        Log.d(TAG, "onSurfaceChanged: " + width + "x" + height
                 + ", gl10: " + gl1.toString());
         GL11 gl = (GL11) gl1;
         mGL = gl;
@@ -434,7 +434,7 @@ public class GLRootView extends GLSurfaceView
             if (mFrameCountingStart == 0) {
                 mFrameCountingStart = now;
             } else if ((now - mFrameCountingStart) > 1000000000) {
-                Log.v(TAG, "fps: " + (double) mFrameCount
+                Log.d(TAG, "fps: " + (double) mFrameCount
                         * 1000000000 / (now - mFrameCountingStart));
                 mFrameCountingStart = now;
                 mFrameCount = 0;

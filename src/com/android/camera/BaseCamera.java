@@ -456,7 +456,7 @@ public abstract class BaseCamera extends NoSearchActivity implements View.OnClic
     
     private final class ZoomListener implements android.hardware.Camera.OnZoomChangeListener {
         public void onZoomChange(int value, boolean stopped, android.hardware.Camera camera) {
-            Log.v(TAG, "Zoom changed: value=" + value + ". stopped=" + stopped);
+            Log.d(TAG, "Zoom changed: value=" + value + ". stopped=" + stopped);
             mZoomValue = value;
             // Keep mParameters up to date. We do not getParameter again in
             // takePicture. If we do not do this, wrong zoom value will be set.

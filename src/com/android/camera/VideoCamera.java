@@ -316,7 +316,7 @@ public class VideoCamera extends BaseCamera implements
                     break;
                 }
                 default:
-                    Log.v(TAG, "Unhandled message: " + msg.what);
+                    Log.d(TAG, "Unhandled message: " + msg.what);
                     break;
             }
         }
@@ -935,7 +935,7 @@ public class VideoCamera extends BaseCamera implements
     }
 
     private void closeCamera() {
-        Log.v(TAG, "closeCamera");
+        Log.d(TAG, "closeCamera");
         if (mCameraDevice == null) {
             Log.d(TAG, "already stopped.");
             return;
@@ -1154,7 +1154,7 @@ public class VideoCamera extends BaseCamera implements
         if (mCameraVideoFilename != null) {
             File f = new File(mCameraVideoFilename);
             if (f.length() == 0 && f.delete()) {
-                Log.v(TAG, "Empty video file deleted: " + mCameraVideoFilename);
+                Log.d(TAG, "Empty video file deleted: " + mCameraVideoFilename);
                 mCameraVideoFilename = null;
             }
         }
@@ -1162,7 +1162,7 @@ public class VideoCamera extends BaseCamera implements
 
     // Prepares media recorder.
     private void initializeRecorder() {
-        Log.v(TAG, "initializeRecorder");
+        Log.d(TAG, "initializeRecorder");
         if (mMediaRecorder != null) return;
 
         // We will call initializeRecorder() again when the alert is hidden.
@@ -1213,7 +1213,7 @@ public class VideoCamera extends BaseCamera implements
             mMediaRecorder.setVideoEncodingBitRate(mVideoBitrate);
             mMediaRecorder.setVideoEncoder(mVideoEncoder);
             mMediaRecorder.setAudioEncoder(mAudioEncoder);
-            Log.v(TAG, "Custom format " +
+            Log.d(TAG, "Custom format " +
                        " output format " + OUTPUT_FORMAT_TABLE.get(mOutputFormat) +
                        " Video Fps " +  mVideoFps +
                        " Video Bitrate " + mVideoBitrate +
@@ -1316,7 +1316,7 @@ public class VideoCamera extends BaseCamera implements
         }
         values.put(Video.Media.DATA, filePath);
         mCameraVideoFilename = filePath;
-        Log.v(TAG, "Current camera video filename: " + mCameraVideoFilename);
+        Log.d(TAG, "Current camera video filename: " + mCameraVideoFilename);
         mCurrentVideoValues = values;
     }
 
@@ -1334,7 +1334,7 @@ public class VideoCamera extends BaseCamera implements
                 mCurrentVideoUri = null;
                 mCurrentVideoFilename = null;
             } finally {
-                Log.v(TAG, "Current video URI: " + mCurrentVideoUri);
+                Log.d(TAG, "Current video URI: " + mCurrentVideoUri);
             }
         }
         mCurrentVideoValues = null;
@@ -1353,10 +1353,10 @@ public class VideoCamera extends BaseCamera implements
     }
 
     private void deleteVideoFile(String fileName) {
-        Log.v(TAG, "Deleting video " + fileName);
+        Log.d(TAG, "Deleting video " + fileName);
         File f = new File(fileName);
         if (!f.delete()) {
-            Log.v(TAG, "Could not delete " + fileName);
+            Log.d(TAG, "Could not delete " + fileName);
         }
     }
 
@@ -1442,11 +1442,11 @@ public class VideoCamera extends BaseCamera implements
     }
 
     private void startVideoRecording() {
-        Log.v(TAG, "startVideoRecording");
+        Log.d(TAG, "startVideoRecording");
         if (!mMediaRecorderRecording) {
 
             if (mStorageStatus != STORAGE_STATUS_OK) {
-                Log.v(TAG, "Storage issue, ignore the start request");
+                Log.d(TAG, "Storage issue, ignore the start request");
                 return;
             }
 
@@ -1563,7 +1563,7 @@ public class VideoCamera extends BaseCamera implements
     }
 
     private void stopVideoRecording() {
-        Log.v(TAG, "stopVideoRecording");
+        Log.d(TAG, "stopVideoRecording");
         boolean needToRegisterRecording = false;
         if (mMediaRecorderRecording || mMediaRecorder != null) {
             if (mMediaRecorderRecording && mMediaRecorder != null) {
@@ -1576,7 +1576,7 @@ public class VideoCamera extends BaseCamera implements
                 }
                 mHeadUpDisplay.setEnabled(true);
                 mCurrentVideoFilename = mCameraVideoFilename;
-                Log.v(TAG, "Setting current video filename: "
+                Log.d(TAG, "Setting current video filename: "
                         + mCurrentVideoFilename);
                 needToRegisterRecording = true;
                 mMediaRecorderRecording = false;

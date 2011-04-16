@@ -244,7 +244,7 @@ public class Camera extends BaseCamera {
                     if (mJpegPictureCallbackTime != 0) {
                         long now = System.currentTimeMillis();
                         mJpegCallbackFinishTime = now - mJpegPictureCallbackTime;
-                        Log.v(TAG, "mJpegCallbackFinishTime = "
+                        Log.d(TAG, "mJpegCallbackFinishTime = "
                                 + mJpegCallbackFinishTime + "ms");
                         mJpegPictureCallbackTime = 0;
                     }
@@ -538,7 +538,7 @@ public class Camera extends BaseCamera {
         public void onShutter() {
             mShutterCallbackTime = System.currentTimeMillis();
             mShutterLag = mShutterCallbackTime - mCaptureStartTime;
-            Log.v(TAG, "mShutterLag = " + mShutterLag + "ms");
+            Log.d(TAG, "mShutterLag = " + mShutterLag + "ms");
             clearFocusState();
         }
     }
@@ -547,7 +547,7 @@ public class Camera extends BaseCamera {
         public void onPictureTaken(
                 byte [] data, android.hardware.Camera camera) {
             mPostViewPictureCallbackTime = System.currentTimeMillis();
-            Log.v(TAG, "mShutterToPostViewCallbackTime = "
+            Log.d(TAG, "mShutterToPostViewCallbackTime = "
                     + (mPostViewPictureCallbackTime - mShutterCallbackTime)
                     + "ms");
         }
@@ -557,7 +557,7 @@ public class Camera extends BaseCamera {
         public void onPictureTaken(
                 byte [] rawData, android.hardware.Camera camera) {
             mRawPictureCallbackTime = System.currentTimeMillis();
-            Log.v(TAG, "mShutterToRawCallbackTime = "
+            Log.d(TAG, "mShutterToRawCallbackTime = "
                     + (mRawPictureCallbackTime - mShutterCallbackTime) + "ms");
 
         }
@@ -591,7 +591,7 @@ public class Camera extends BaseCamera {
                 mPictureDisplayedToJpegCallbackTime =
                         mJpegPictureCallbackTime - mRawPictureCallbackTime;
             }
-            Log.v(TAG, "mPictureDisplayedToJpegCallbackTime = "
+            Log.d(TAG, "mPictureDisplayedToJpegCallbackTime = "
                     + mPictureDisplayedToJpegCallbackTime + "ms");
             mHeadUpDisplay.setEnabled(true);
 
@@ -620,7 +620,7 @@ public class Camera extends BaseCamera {
             if (!mHandler.hasMessages(RESTART_PREVIEW)) {
                 long now = System.currentTimeMillis();
                 mJpegCallbackFinishTime = now - mJpegPictureCallbackTime;
-                Log.v(TAG, "mJpegCallbackFinishTime = "
+                Log.d(TAG, "mJpegCallbackFinishTime = "
                         + mJpegCallbackFinishTime + "ms");
                 mJpegPictureCallbackTime = 0;
             }
@@ -633,7 +633,7 @@ public class Camera extends BaseCamera {
         public void onError(int error, android.hardware.Camera camera) {
             if (error == android.hardware.Camera.CAMERA_ERROR_SERVER_DIED) {
                  mMediaServerDied = true;
-                 Log.v(TAG, "media server died");
+                 Log.d(TAG, "media server died");
             }
         }
     }
@@ -1614,7 +1614,7 @@ public class Camera extends BaseCamera {
         mCameraDevice.setErrorCallback(mErrorCallback);
 
         try {
-            Log.v(TAG, "startPreview");
+            Log.d(TAG, "startPreview");
             mCameraDevice.startPreview();
         } catch (Throwable ex) {
             closeCamera();
@@ -1634,7 +1634,7 @@ public class Camera extends BaseCamera {
 
     private void stopPreview() {
         if (mCameraDevice != null && mPreviewing) {
-            Log.v(TAG, "stopPreview");
+            Log.d(TAG, "stopPreview");
             mCameraDevice.stopPreview();
         }
         mPreviewing = false;
@@ -1677,7 +1677,7 @@ public class Camera extends BaseCamera {
 
         // Cannot find the one match the aspect ratio, ignore the requirement
         if (optimalSize == null) {
-            Log.v(TAG, "No preview size match the aspect ratio");
+            Log.d(TAG, "No preview size match the aspect ratio");
             minDiff = Double.MAX_VALUE;
             for (Size size : sizes) {
                 if (Math.abs(size.height - targetHeight) < minDiff) {
@@ -2220,7 +2220,7 @@ public class Camera extends BaseCamera {
         // in progress.
         if (canTakePicture()) {
             mHeadUpDisplay.setEnabled(false);
-            Log.v(TAG, "Start autofocus.");
+            Log.d(TAG, "Start autofocus.");
             mFocusStartTime = System.currentTimeMillis();
             mFocusState = FOCUSING;
             updateFocusIndicator();
@@ -2232,7 +2232,7 @@ public class Camera extends BaseCamera {
         // User releases half-pressed focus key.
         if (mFocusState == FOCUSING || mFocusState == FOCUS_SUCCESS
                 || mFocusState == FOCUS_FAIL) {
-            Log.v(TAG, "Cancel autofocus.");
+            Log.d(TAG, "Cancel autofocus.");
             mHeadUpDisplay.setEnabled(true);
             mCameraDevice.cancelAutoFocus();
         }
